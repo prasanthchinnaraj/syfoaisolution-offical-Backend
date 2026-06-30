@@ -8,6 +8,8 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr
 
+from test import router as voice_router
+
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
 
 app = FastAPI(title="Syfo AI — Strategy Booking API", version="1.0.0")
@@ -22,6 +24,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(voice_router)
 
 DB_HOST="database-1.cqhcysao051z.us-east-1.rds.amazonaws.com"
 DB_PORT=5432
